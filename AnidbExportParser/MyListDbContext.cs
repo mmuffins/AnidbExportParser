@@ -18,6 +18,7 @@ namespace AnidbExportParser
         public DbSet<AnimeCategory> AnimeCategory { get; set; }
         public DbSet<Category> Category { get; set; }
         public DbSet<Company> Company { get; set; }
+        public DbSet<EpisodeTitle> EpisodeTitle { get; set; }
         public DbSet<Title> Title { get; set; }
         public DbSet<UserInfo> UserInfo { get; set; }
 
@@ -57,6 +58,10 @@ namespace AnidbExportParser
             builder.Entity<Company>()
                 .ToTable("company")
                 .HasKey(c => c.EntityId);
+
+            builder.Entity<EpisodeTitle>()
+                .ToTable("episode_title")
+                .HasKey(c => new { c.AnimeID, c.EpID, c.LanguageID });
 
             builder.Entity<Title>()
                 .ToTable("title")

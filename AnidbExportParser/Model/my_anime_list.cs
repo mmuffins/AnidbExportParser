@@ -14,6 +14,9 @@ namespace AnidbExportParser.Model
         [XmlElement(ElementName = "company")]
         public List<Company> Companies { get; set; }
 
+        [XmlElement(ElementName = "episode_title")]
+        public List<EpisodeTitle> EpisodeTitle { get; set; }
+
         [XmlElement(ElementName = "title")]
         public List<Title> Titles { get; set; }
 
@@ -25,6 +28,7 @@ namespace AnidbExportParser.Model
             AnimeCategory = new List<AnimeCategory>();
             Category = new List<Category>();
             Companies = new List<Company>();
+            EpisodeTitle = new List<EpisodeTitle>();
             Titles = new List<Title>();
             UserInfo = new List<UserInfo>();
         }
