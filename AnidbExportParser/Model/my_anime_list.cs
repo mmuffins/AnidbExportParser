@@ -6,21 +6,21 @@ namespace AnidbExportParser.Model
     public class my_anime_list
     {
         [XmlElement(ElementName = "title")]
-        public List<Title> titles { get; set; }
+        public List<Title> Titles { get; set; }
 
         [XmlElement(ElementName = "company")]
-        public List<Company> companies { get; set; }
+        public List<Company> Companies { get; set; }
 
         [XmlElement(ElementName = "user_info")]
-        public List<user_info> user_info { get; set; }
+        public List<UserInfo> UserInfo { get; set; }
 
-        //public user_info user_info { get; set; }
+        //public UserInfo UserInfo { get; set; }
 
         public my_anime_list()
         {
-            titles = new List<Title>();
-            companies = new List<Company>();
-            user_info = new List<user_info>();
+            Titles = new List<Title>();
+            Companies = new List<Company>();
+            UserInfo = new List<UserInfo>();
         }
     }
 }

@@ -3,7 +3,7 @@
 namespace AnidbExportParser.Model
 {
     [XmlRoot(ElementName = "user_info")]
-    public class user_info
+    public class UserInfo
     {
         public string UserName { get; set; }
         public int UserID { get; set; }

@@ -17,7 +17,7 @@ namespace AnidbExportParser
     {
         public DbSet<Title> Title { get; set; }
         public DbSet<Company> Company { get; set; }
-        public DbSet<user_info> user_info { get; set; }
+        public DbSet<UserInfo> UserInfo { get; set; }
         //public DbSet<Datasource> Datasource { get; set; }
         //public DbSet<Summary> Summary { get; set; }
         //public DbSet<Tag> Tag { get; set; }
@@ -79,7 +79,7 @@ namespace AnidbExportParser
             //        c.TitleTypeID
             //    });
 
-            builder.Entity<user_info>()
+            builder.Entity<UserInfo>()
                 .ToTable("user_info")
                 .HasKey(c => c.UserID);
 
