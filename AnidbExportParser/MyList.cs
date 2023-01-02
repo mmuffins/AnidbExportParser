@@ -17,7 +17,7 @@ namespace AnidbExportParser
 
         public async Task ParseAnidbXml(string path)
         {
-            if (!File.Exists(path))
+            if (!System.IO.File.Exists(path))
             {
                 throw new FileNotFoundException(path);
             }
@@ -57,9 +57,11 @@ namespace AnidbExportParser
 
             await context.AnimeCategory.AddRangeAsync(AnidbData.AnimeCategory);
             await context.Award.AddRangeAsync(AnidbData.Award);
+            await context.AwardType.AddRangeAsync(AnidbData.AwardType);
             await context.Category.AddRangeAsync(AnidbData.Category);
             await context.Company.AddRangeAsync(AnidbData.Companies);
             await context.EpisodeTitle.AddRangeAsync(AnidbData.EpisodeTitle);
+            await context.File.AddRangeAsync(AnidbData.File);
             await context.Title.AddRangeAsync(AnidbData.Titles);
             await context.UserInfo.AddRangeAsync(AnidbData.UserInfo);
 

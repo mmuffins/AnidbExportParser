@@ -23,6 +23,9 @@ namespace AnidbExportParser.Model
         [XmlElement(ElementName = "episode_title")]
         public List<EpisodeTitle> EpisodeTitle { get; set; }
 
+        [XmlElement(ElementName = "file")]
+        public List<Model.File> File { get; set; }
+
         [XmlElement(ElementName = "title")]
         public List<Title> Titles { get; set; }
 
@@ -37,6 +40,7 @@ namespace AnidbExportParser.Model
             Category = new List<Category>();
             Companies = new List<Company>();
             EpisodeTitle = new List<EpisodeTitle>();
+            File = new List<Model.File>();
             Titles = new List<Title>();
             UserInfo = new List<UserInfo>();
         }

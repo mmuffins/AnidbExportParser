@@ -9,6 +9,7 @@ using System.Text;
 using System.Threading.Tasks;
 using AnidbExportParser.Model;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 
 
 namespace AnidbExportParser
@@ -21,6 +22,7 @@ namespace AnidbExportParser
         public DbSet<Category> Category { get; set; }
         public DbSet<Company> Company { get; set; }
         public DbSet<EpisodeTitle> EpisodeTitle { get; set; }
+        public DbSet<Model.File> File { get; set; }
         public DbSet<Title> Title { get; set; }
         public DbSet<UserInfo> UserInfo { get; set; }
 
@@ -41,6 +43,8 @@ namespace AnidbExportParser
             {
                 optionsBuilder.UseSqlite("Data Source=");
             }
+
+            optionsBuilder.EnableSensitiveDataLogging();
         }
 
         protected override void OnModelCreating(ModelBuilder builder)
@@ -72,6 +76,10 @@ namespace AnidbExportParser
             builder.Entity<EpisodeTitle>()
                 .ToTable("episode_title")
                 .HasKey(c => new { c.AnimeID, c.EpID, c.LanguageID });
+
+            builder.Entity<Model.File>()
+                .ToTable("file")
+                .HasKey(c => new { c.FID, c.EpID });
 
             builder.Entity<Title>()
                 .ToTable("title")
