@@ -56,6 +56,7 @@ namespace AnidbExportParser
             await context.Database.EnsureCreatedAsync();
 
             await context.AnimeCategory.AddRangeAsync(AnidbData.AnimeCategory);
+            await context.Award.AddRangeAsync(AnidbData.Award);
             await context.Category.AddRangeAsync(AnidbData.Category);
             await context.Company.AddRangeAsync(AnidbData.Companies);
             await context.EpisodeTitle.AddRangeAsync(AnidbData.EpisodeTitle);
@@ -63,16 +64,6 @@ namespace AnidbExportParser
             await context.UserInfo.AddRangeAsync(AnidbData.UserInfo);
 
             await context.SaveChangesAsync();
-
-
-            //using (var db = DbContextFactory(path))
-            //{
-            //    Console.WriteLine("dd");
-            //    //db.title.Insert(AnidbData.titles[0]);
-            //    //db.title.InsertBulk(AnidbData.titles, 5000);
-            //    //db.company.InsertBulk(AnidbData.companies, 5000);
-
-            //}
         }
 
 

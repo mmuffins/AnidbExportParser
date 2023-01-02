@@ -1,14 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-using System.Xml.Serialization;
+﻿using System.Xml.Serialization;
 
 namespace AnidbExportParser.Model
 {
     [XmlRoot(ElementName = "episode_title")]
     public class EpisodeTitle
     {
-        //[XmlIgnore]
-        //[DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        //public long EntityId { get; private set; }
         public int AnimeID { get; set; }
         public int EpID { get; set; }
         public string Name { get; set; }
