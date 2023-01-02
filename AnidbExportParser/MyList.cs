@@ -55,6 +55,7 @@ namespace AnidbExportParser
             using var context = DBFactory.GetContext();
             await context.Database.EnsureCreatedAsync();
 
+            await context.Category.AddRangeAsync(AnidbData.Category);
             await context.Company.AddRangeAsync(AnidbData.Companies);
             await context.Title.AddRangeAsync(AnidbData.Titles);
             await context.UserInfo.AddRangeAsync(AnidbData.UserInfo);

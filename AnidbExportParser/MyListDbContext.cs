@@ -15,16 +15,10 @@ namespace AnidbExportParser
 {
     public class MyListDbContext : DbContext
     {
-        public DbSet<Title> Title { get; set; }
+        public DbSet<Category> Category { get; set; }
         public DbSet<Company> Company { get; set; }
+        public DbSet<Title> Title { get; set; }
         public DbSet<UserInfo> UserInfo { get; set; }
-        //public DbSet<Datasource> Datasource { get; set; }
-        //public DbSet<Summary> Summary { get; set; }
-        //public DbSet<Tag> Tag { get; set; }
-        //public DbSet<TagCategory> TagCategory { get; set; }
-        //public DbSet<TagFilter> TagFilter { get; set; }
-        //public DbSet<Timeline> Timeline { get; set; }
-        //public DbSet<TimelineType> TimelineType { get; set; }
 
         public MyListDbContext() : base() { }
 
@@ -49,35 +43,17 @@ namespace AnidbExportParser
         {
             base.OnModelCreating(builder);
 
-            //builder.Entity<title>().Property(m => m.UserId)
-            //         .HasDatabaseGeneratedOption(DatabaseGeneratedOption.None);
+            builder.Entity<Category>()
+                .ToTable("category")
+                .HasKey(c => c.CategoryID);
 
             builder.Entity<Company>()
                 .ToTable("company")
                 .HasKey(c => c.EntityId);
 
-            //builder.Entity<Company>()
-            //    .ToTable("company")
-            //    .HasIndex(c => new
-            //    {
-            //        c.AnimeID,
-            //        c.CompanyID,
-            //        c.CompanyTypeID
-            //    });
-
             builder.Entity<Title>()
                 .ToTable("title")
                 .HasKey(c => c.EntityId);
-
-
-
-            //builder.Entity<Title>()
-            //    .ToTable("title")
-            //    .HasKey(c => new {
-            //        c.AnimeID,
-            //        c.LanguageID,
-            //        c.TitleTypeID
-            //    });
 
             builder.Entity<UserInfo>()
                 .ToTable("user_info")

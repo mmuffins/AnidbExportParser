@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Xml.Serialization;
 
 namespace AnidbExportParser.Model
 {
+    [XmlRoot(ElementName = "category")]
     public class Category
     {
         public int CategoryID { get; set; }

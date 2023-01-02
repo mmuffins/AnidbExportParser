@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
-    <Exec Command="cd &quot;C:\Users\email_000\source\AnidbExportParser\ParserConsole&quot;&#xD;&#xA;del /s /q *Test1.db" />
+    <Exec Command="cd &quot;C:\Users\email_000\source\AnidbExportParser\ParserConsole&quot;&#xD;&#xA;del /s /q *Test1.db&#xD;&#xA;del /s /q *Test2.db" />
   </Target>
 
 </Project>
