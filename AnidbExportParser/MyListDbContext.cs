@@ -15,6 +15,7 @@ namespace AnidbExportParser
 {
     public class MyListDbContext : DbContext
     {
+        public DbSet<AnimeCategory> AnimeCategory { get; set; }
         public DbSet<Category> Category { get; set; }
         public DbSet<Company> Company { get; set; }
         public DbSet<Title> Title { get; set; }
@@ -42,6 +43,12 @@ namespace AnidbExportParser
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+
+            builder.Entity<AnimeCategory>()
+                .ToTable("anime_category")
+                .HasKey(c => c.EntityId);
+            builder.Entity<AnimeCategory>()
+                .HasIndex(c => new { c.AnimeID, c.CategoryID });
 
             builder.Entity<Category>()
                 .ToTable("category")
