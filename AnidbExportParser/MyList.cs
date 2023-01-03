@@ -74,7 +74,6 @@ namespace AnidbExportParser
             await context.SaveChangesAsync();
         }
 
-
         private static void serializer_UnknownAttribute(object sender, XmlAttributeEventArgs e)
         {
             throw new System.NotImplementedException();
@@ -85,6 +84,5 @@ namespace AnidbExportParser
             Console.WriteLine($"An error occurred while deserializing line {e.LineNumber} with name {e.Name}");
             throw new System.NotImplementedException();
         }
-
     }
 }
