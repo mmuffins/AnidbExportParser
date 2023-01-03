@@ -55,6 +55,7 @@ namespace AnidbExportParser
             using var context = DBFactory.GetContext();
             await context.Database.EnsureCreatedAsync();
 
+            await context.Anime.AddRangeAsync(AnidbData.Anime);
             await context.AnimeCategory.AddRangeAsync(AnidbData.AnimeCategory);
             await context.Award.AddRangeAsync(AnidbData.Award);
             await context.AwardType.AddRangeAsync(AnidbData.AwardType);

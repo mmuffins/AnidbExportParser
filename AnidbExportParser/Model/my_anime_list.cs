@@ -5,6 +5,9 @@ namespace AnidbExportParser.Model
     [XmlRoot(ElementName = "my_anime_list")]
     public class my_anime_list
     {
+        [XmlElement(ElementName = "anime")]
+        public List<Anime> Anime { get; set; }
+
         [XmlElement(ElementName = "anime_category")]
         public List<AnimeCategory> AnimeCategory { get; set; }
 
@@ -34,6 +37,7 @@ namespace AnidbExportParser.Model
 
         public my_anime_list()
         {
+            Anime = new List<Anime>();
             AnimeCategory = new List<AnimeCategory>();
             Award = new List<Award>();
             AwardType = new List<AwardType>();

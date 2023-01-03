@@ -1,4 +1,6 @@
-﻿using System.Xml.Serialization;
+﻿using ExtensionMethods;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Xml.Serialization;
 
 namespace AnidbExportParser.Model
 {
@@ -25,7 +27,18 @@ namespace AnidbExportParser.Model
         public int GID { get; set; }
         public string? GName { get; set; }
         public string? GShortName { get; set; }
-        public string ReleaseDate { get; set; }
+
+        [XmlIgnore]
+        public DateTime? ReleaseDate { get; set; }
+
+        [NotMapped]
+        [XmlElement("ReleaseDate")]
+        public string? ReleaseDateString
+        {
+            get { return ReleaseDate.HasValue ? ReleaseDate.Value.ToString("yyyy-MM-dd HH:mm:ss") : null; }
+            set { ReleaseDate = value.ParseAniDbDateTime(); }
+        }
+
         public int QualityID { get; set; }
         public string QualityName { get; set; }
         public string ResName { get; set; }
@@ -71,12 +84,54 @@ namespace AnidbExportParser.Model
         public string TypeName { get; set; }
         public string? Other { get; set; }
         public int HasComment { get; set; }
-        public string Date { get; set; }
-        public string Update { get; set; }
+
+        [XmlIgnore]
+        public DateTime? Date { get; set; }
+
+        [NotMapped]
+        [XmlElement("Date")]
+        public string? DateString
+        {
+            get { return Date.HasValue ? Date.Value.ToString("yyyy-MM-dd HH:mm:ss") : null; }
+            set { Date = value.ParseAniDbDateTime(); }
+        }
+
+        [XmlIgnore]
+        public DateTime? Update { get; set; }
+
+        [NotMapped]
+        [XmlElement("Update")]
+        public string? UpdateString
+        {
+            get { return Update.HasValue ? Update.Value.ToString("yyyy-MM-dd HH:mm:ss") : null; }
+            set { Update = value.ParseAniDbDateTime(); }
+        }
+
         public string? Storage { get; set; }
         public string? Source { get; set; }
-        public string ListDate { get; set; }
-        public string ViewDate { get; set; }
+
+        [XmlIgnore]
+        public DateTime? ListDate { get; set; }
+
+        [NotMapped]
+        [XmlElement("ListDate")]
+        public string? ListDateString
+        {
+            get { return ListDate.HasValue ? ListDate.Value.ToString("yyyy-MM-dd HH:mm:ss") : null; }
+            set { ListDate = value.ParseAniDbDateTime(); }
+        }
+
+        [XmlIgnore]
+        public DateTime? ViewDate { get; set; }
+
+        [NotMapped]
+        [XmlElement("ViewDate")]
+        public string? ViewDateString
+        {
+            get { return ViewDate.HasValue ? ViewDate.Value.ToString("yyyy-MM-dd HH:mm:ss") : null; }
+            set { ViewDate = value.ParseAniDbDateTime(); }
+        }
+
         public int State { get; set; }
         public int StateCRCOK { get; set; }
         public int StateCRCFailed { get; set; }

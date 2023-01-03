@@ -1,4 +1,6 @@
-﻿using System.Xml.Serialization;
+﻿using ExtensionMethods;
+using System.ComponentModel.DataAnnotations.Schema;
+using System.Xml.Serialization;
 
 namespace AnidbExportParser.Model
 {
@@ -7,7 +9,18 @@ namespace AnidbExportParser.Model
     {
         public string UserName { get; set; }
         public int UserID { get; set; }
-        public string ExportDate { get; set; }
+
+        [XmlIgnore]
+        public DateTime? ExportDate { get; set; }
+
+        [NotMapped]
+        [XmlElement("ExportDate")]
+        public string? ExportDateString
+        {
+            get { return ExportDate.HasValue ? ExportDate.Value.ToString("yyyy-MM-dd HH:mm:ss") : null; }
+            set { ExportDate = value.ParseAniDbDateTime(); }
+        }
+
         public int MyAnimeCount { get; set; }
         public int MyEpisodeCount { get; set; }
         public int MyFileCount { get; set; }

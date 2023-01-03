@@ -16,6 +16,7 @@ namespace AnidbExportParser
 {
     public class MyListDbContext : DbContext
     {
+        public DbSet<Anime> Anime { get; set; }
         public DbSet<AnimeCategory> AnimeCategory { get; set; }
         public DbSet<Award> Award { get; set; }
         public DbSet<AwardType> AwardType { get; set; }
@@ -50,6 +51,10 @@ namespace AnidbExportParser
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
+
+            builder.Entity<Anime>()
+                .ToTable("anime")
+                .HasKey(c => c.AnimeID);
 
             builder.Entity<AnimeCategory>()
                 .ToTable("anime_category")
