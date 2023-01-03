@@ -110,7 +110,7 @@ namespace AnidbExportParser
                 .HasIndex(c => new { c.FID1, c.FID2 });
 
             builder.Entity<AnimeGroup>()
-                .ToTable("aniime_group")
+                .ToTable("anime_group")
                 .HasKey(c => new { c.AnimeID, c.GID });
 
             builder.Entity<Tag>()
