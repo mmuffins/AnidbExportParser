@@ -25,6 +25,7 @@ namespace AnidbExportParser
         public DbSet<Episode> Episode { get; set; }
         public DbSet<EpisodeTitle> EpisodeTitle { get; set; }
         public DbSet<Model.File> File { get; set; }
+        public DbSet<AnimeGroup> AnimeGroup { get; set; }
         public DbSet<Title> Title { get; set; }
         public DbSet<UserInfo> UserInfo { get; set; }
 
@@ -90,6 +91,10 @@ namespace AnidbExportParser
             builder.Entity<Model.File>()
                 .ToTable("file")
                 .HasKey(c => new { c.FID, c.EpID });
+
+            builder.Entity<AnimeGroup>()
+                .ToTable("aniime_group")
+                .HasKey(c => new { c.AnimeID, c.GID });
 
             builder.Entity<Title>()
                 .ToTable("title")

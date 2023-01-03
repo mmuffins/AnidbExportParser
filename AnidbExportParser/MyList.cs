@@ -64,6 +64,7 @@ namespace AnidbExportParser
             await context.Episode.AddRangeAsync(AnidbData.Episode);
             await context.EpisodeTitle.AddRangeAsync(AnidbData.EpisodeTitle);
             await context.File.AddRangeAsync(AnidbData.File);
+            await context.AnimeGroup.AddRangeAsync(AnidbData.AnimeGroup);
             await context.Title.AddRangeAsync(AnidbData.Titles);
             await context.UserInfo.AddRangeAsync(AnidbData.UserInfo);
 
