@@ -11,13 +11,18 @@ namespace ExtensionMethods
 
         public static decimal? ParseAniDbDecimal(this string str)
         {
-            if (str.Equals("-"))
-            {
-                return null;
-            }
-                
             decimal k;
             if (decimal.TryParse(str, out k))
+            {
+                return k;
+            }
+            return null;
+        }
+
+        public static Int32? ParseAniDbInt32(this string str)
+        {
+            Int32 k;
+            if (Int32.TryParse(str, out k))
             {
                 return k;
             }

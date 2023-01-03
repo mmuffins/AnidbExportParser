@@ -86,6 +86,7 @@ namespace AnidbExportParser.Model
         }
 
         public int Reviews { get; set; }
+
         [XmlIgnore]
         public int? MyVote { get; set; }
 
@@ -93,14 +94,8 @@ namespace AnidbExportParser.Model
         [XmlElement("MyVote")]
         public string? MyVoteString
         {
-            get { return (MyVote.HasValue) ? MyVote.ToString() : ""; }
-            set 
-            {
-                if (!value.Equals(""))
-                {
-                    MyVote = Int32.Parse(value);
-                }
-            }
+            get { return MyVote.HasValue ? MyVote.ToString() : ""; }
+            set { MyVote = value.ParseAniDbInt32(); }
         }
 
         [XmlIgnore]

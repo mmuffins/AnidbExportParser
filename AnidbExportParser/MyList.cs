@@ -61,6 +61,7 @@ namespace AnidbExportParser
             await context.AwardType.AddRangeAsync(AnidbData.AwardType);
             await context.Category.AddRangeAsync(AnidbData.Category);
             await context.Company.AddRangeAsync(AnidbData.Companies);
+            await context.Episode.AddRangeAsync(AnidbData.Episode);
             await context.EpisodeTitle.AddRangeAsync(AnidbData.EpisodeTitle);
             await context.File.AddRangeAsync(AnidbData.File);
             await context.Title.AddRangeAsync(AnidbData.Titles);

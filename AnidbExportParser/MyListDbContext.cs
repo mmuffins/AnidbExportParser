@@ -22,6 +22,7 @@ namespace AnidbExportParser
         public DbSet<AwardType> AwardType { get; set; }
         public DbSet<Category> Category { get; set; }
         public DbSet<Company> Company { get; set; }
+        public DbSet<Episode> Episode { get; set; }
         public DbSet<EpisodeTitle> EpisodeTitle { get; set; }
         public DbSet<Model.File> File { get; set; }
         public DbSet<Title> Title { get; set; }
@@ -77,6 +78,10 @@ namespace AnidbExportParser
             builder.Entity<Company>()
                 .ToTable("company")
                 .HasKey(c => c.EntityId);
+
+            builder.Entity<Episode>()
+                .ToTable("episode")
+                .HasKey(c => c.EpID);
 
             builder.Entity<EpisodeTitle>()
                 .ToTable("episode_title")
