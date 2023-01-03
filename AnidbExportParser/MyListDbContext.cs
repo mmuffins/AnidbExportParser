@@ -26,6 +26,7 @@ namespace AnidbExportParser
         public DbSet<EpisodeTitle> EpisodeTitle { get; set; }
         public DbSet<Model.File> File { get; set; }
         public DbSet<AnimeGroup> AnimeGroup { get; set; }
+        public DbSet<Tag> Tag { get; set; }
         public DbSet<Title> Title { get; set; }
         public DbSet<UserInfo> UserInfo { get; set; }
 
@@ -96,6 +97,12 @@ namespace AnidbExportParser
                 .ToTable("aniime_group")
                 .HasKey(c => new { c.AnimeID, c.GID });
 
+            builder.Entity<Tag>()
+                .ToTable("tag")
+                .HasKey(c => c.EntityId);
+            builder.Entity<Tag>()
+                .HasIndex(c => new { c.TagID, c.AnimeID });
+
             builder.Entity<Title>()
                 .ToTable("title")
                 .HasKey(c => c.EntityId);
@@ -104,40 +111,6 @@ namespace AnidbExportParser
                 .ToTable("user_info")
                 .HasKey(c => c.UserID);
 
-
-            
-
-            //builder.Entity<title>()
-            //    .HasIndex(c => c.AnimeID)
-            //    .IsUnique();
-
-            //builder.Entity<company>()
-            //    .HasIndex(c => c.AnimeID)
-            //    .IsUnique();
-
-            //builder.Entity<company>()
-            //    .HasIndex(c => c.CompanyID)
-            //    .IsUnique();
-
-            //builder.Entity<Datasource>()
-            //    .HasIndex(d => d.DBLocation)
-            //    .IsUnique();
-
-            //builder.Entity<Datasource>()
-            //    .HasIndex(d => d.Name)
-            //    .IsUnique();
-
-            //builder.Entity<Summary>()
-            //    .HasIndex(s => new { s.TimelineId, s.TagId, s.StartDate })
-            //    .IsUnique();
-
-            //builder.Entity<Tag>()
-            //    .HasIndex(t => t.Name)
-            //    .IsUnique();
-
-            //builder.Entity<TagCategory>()
-            //    .HasIndex(tc => new { tc.TagId, tc.CategoryId })
-            //    .IsUnique();
 
             //builder.Entity<TagCategory>()
             //    .HasOne(tc => tc.Tag)
@@ -148,21 +121,6 @@ namespace AnidbExportParser
             //    .HasOne(tc => tc.Category)
             //    .WithMany(t => t.TagCategories)
             //    .OnDelete(DeleteBehavior.Cascade);
-
-            //builder.Entity<TagFilter>()
-            //    .HasIndex(tf => new { tf.TagId, tf.GroupName, tf.DisplayName, tf.TimelineTypeId })
-            //    .IsUnique();
-
-            //builder.Entity<TagFilter>()
-            //    .HasIndex(tf => new { tf.Active });
-
-            //builder.Entity<Timeline>()
-            //    .HasIndex(tl => new { tl.ManicTimelineId, tl.TimelineTypeId, tl.DataSourceId })
-            //    .IsUnique();
-
-            //builder.Entity<TimelineType>()
-            //    .HasIndex(tt => tt.TypeName)
-            //    .IsUnique();
         }
     }
 
