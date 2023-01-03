@@ -1,4 +1,5 @@
 ﻿using ExtensionMethods;
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Xml.Serialization;
 
@@ -13,7 +14,12 @@ namespace AnidbExportParser.Model
         public long Size { get; set; }
         public int Length { get; set; }
         public int Generic { get; set; }
-        public string? FileType { get; set; }
+
+        // bug in source file, FileType property was provided multiple times
+        [NotMapped]
+        [XmlElement(ElementName = "FileType")]
+        public List<string?> FileType { get; set; }
+
         public string? CRC { get; set; }
         public string? MD5 { get; set; }
         public string? SHA1 { get; set; }

@@ -64,6 +64,8 @@ namespace AnidbExportParser
             await context.Episode.AddRangeAsync(AnidbData.Episode);
             await context.EpisodeTitle.AddRangeAsync(AnidbData.EpisodeTitle);
             await context.File.AddRangeAsync(AnidbData.File);
+            await context.FileEpisode.AddRangeAsync(AnidbData.FileEpisode);
+            await context.FileFile.AddRangeAsync(AnidbData.FileFile);
             await context.AnimeGroup.AddRangeAsync(AnidbData.AnimeGroup);
             await context.Tag.AddRangeAsync(AnidbData.Tag);
             await context.Title.AddRangeAsync(AnidbData.Titles);
@@ -80,7 +82,8 @@ namespace AnidbExportParser
 
         private static void serializer_UnknownNode(object sender, XmlNodeEventArgs e)
         {
-            //throw new System.NotImplementedException();
+            Console.WriteLine($"An error occurred while deserializing line {e.LineNumber} with name {e.Name}");
+            throw new System.NotImplementedException();
         }
 
     }

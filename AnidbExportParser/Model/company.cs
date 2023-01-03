@@ -13,12 +13,12 @@ namespace AnidbExportParser.Model
         public int AnimeID { get; set; }
         public int CompanyID { get; set; }
         public string CompanyName { get; set; }
-        public string CompanyShortName { get; set; }
-        public string CompanyOtherName { get; set; }
+        public string? CompanyShortName { get; set; }
+        public string? CompanyOtherName { get; set; }
         public int CompanyTypeID { get; set; }
-        public string CompanyTypeName { get;}
-        public string CompanyURL { get; set; }
-        public string CompanyPicURL { get; set; }
+        public string? CompanyTypeName { get; set; }
+        public string? CompanyURL { get; set; }
+        public string? CompanyPicURL { get; set; }
         public int CompanyApTypeID { get; set; }
         public string CompanyApTypeName { get; set; }
 

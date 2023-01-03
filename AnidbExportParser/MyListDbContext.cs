@@ -18,6 +18,7 @@ namespace AnidbExportParser
     {
         public DbSet<Anime> Anime { get; set; }
         public DbSet<AnimeCategory> AnimeCategory { get; set; }
+        public DbSet<AnimeGroup> AnimeGroup { get; set; }
         public DbSet<Award> Award { get; set; }
         public DbSet<AwardType> AwardType { get; set; }
         public DbSet<Category> Category { get; set; }
@@ -25,7 +26,8 @@ namespace AnidbExportParser
         public DbSet<Episode> Episode { get; set; }
         public DbSet<EpisodeTitle> EpisodeTitle { get; set; }
         public DbSet<Model.File> File { get; set; }
-        public DbSet<AnimeGroup> AnimeGroup { get; set; }
+        public DbSet<FileEpisode> FileEpisode { get; set; }
+        public DbSet<FileFile> FileFile { get; set; }
         public DbSet<Tag> Tag { get; set; }
         public DbSet<Title> Title { get; set; }
         public DbSet<UserInfo> UserInfo { get; set; }
@@ -92,6 +94,20 @@ namespace AnidbExportParser
             builder.Entity<Model.File>()
                 .ToTable("file")
                 .HasKey(c => new { c.FID, c.EpID });
+
+            builder.Entity<FileEpisode>()
+                .ToTable("file_episode")
+                .HasKey(c => c.EntityId);
+
+            builder.Entity<FileEpisode>()
+                .HasIndex(c => new { c.FID, c.EpID });
+
+            builder.Entity<FileFile>()
+                .ToTable("filefile")
+                .HasKey(c => c.EntityId);
+
+            builder.Entity<FileFile>()
+                .HasIndex(c => new { c.FID1, c.FID2 });
 
             builder.Entity<AnimeGroup>()
                 .ToTable("aniime_group")
