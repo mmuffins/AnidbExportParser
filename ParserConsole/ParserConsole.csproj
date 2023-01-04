@@ -11,6 +11,10 @@
     <ProjectReference Include="..\AnidbExportParser\AnidbExportParser.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="System.CommandLine" Version="2.0.0-beta4.22272.1" />
+  </ItemGroup>
+
   <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
     <Exec Command="cd &quot;C:\Users\email_000\source\AnidbExportParser\ParserConsole&quot;&#xD;&#xA;del /s /q *Test1.db&#xD;&#xA;del /s /q *Test2.db" />
   </Target>

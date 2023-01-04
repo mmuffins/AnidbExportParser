@@ -1,19 +1,21 @@
 ﻿using AnidbExportParser;
-
+using System.CommandLine;
 
 namespace ParserConsole
 {
     internal class Program
     {
-        static async Task Main(string[] args)
+        static async Task<int> Main(string[] args)
         {
-            var anidExportPath = "C:\\Users\\email_000\\source\\AnidbExportParser\\ParserConsole\\full.xml";
-            var exportPath = "C:\\Users\\email_000\\source\\AnidbExportParser\\ParserConsole\\exportTest1.db";
-            var myList = new MyList();
-            await myList.ParseAnidbXml(anidExportPath);
-            await myList.ExportData(exportPath);
+            var rootCommand = new RootCommand()
+            {
+                Name = "AniDBExportParser",
+                Description = "AniDB Export Parser."
+            };
 
-            Console.WriteLine("done!");
+            var convertCommand = new ConvertCommand();
+            rootCommand.Add(convertCommand.GetCommand());
+            return await rootCommand.InvokeAsync(args);
         }
     }
 }
