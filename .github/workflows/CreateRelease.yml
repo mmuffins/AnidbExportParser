@@ -18,7 +18,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
             
-    - name: Setup .NET Core
+    - name: Setup .NET
       uses: actions/setup-dotnet@v1
       with:
         dotnet-version: 7.0.*
@@ -32,13 +32,6 @@ jobs:
     - name: dotnet test
       run: dotnet test AnidbExportParser.sln --configuration ${{ env.Configuration }} --framework ${{ env.Framework }} --verbosity normal --logger "trx;LogFileName=TestResults.trx"
               
-    - name: Publish Unit Test Results
-      uses: dorny/test-reporter@v1.5.0
-      with:
-        name: Unit Test Results
-        path: Tests/**/TestResults.trx
-        reporter: dotnet-trx
-      
     - name: Upload artifact
       uses: actions/upload-artifact@v2
       with:
