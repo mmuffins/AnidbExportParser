@@ -27,7 +27,7 @@ jobs:
       run: dotnet restore
       
     - name: dotnet publish
-      run: dotnet publish AnidbExportParser.sln --configuration ${{ env.Configuration }} -p:PublishSingleFile=false --self-contained false -p:PublishTrimmed=false -p:PublishReadyToRun=true --runtime ${{ env.Runtime }} --framework ${{ env.Framework }} --output publish
+      run: dotnet publish "${{ github.workspace }}/AnidbExportParser/ParserConsole/ParserConsole.csproj" --configuration ${{ env.Configuration }} -p:PublishSingleFile=true --self-contained true -p:PublishTrimmed=false -p:PublishReadyToRun=true --runtime ${{ env.Runtime }} --framework ${{ env.Framework }} --output "${{ github.workspace }}/publish"
       
     - name: dotnet test
       run: dotnet test AnidbExportParser.sln --configuration ${{ env.Configuration }} --framework ${{ env.Framework }} --verbosity normal --logger "trx;LogFileName=TestResults.trx"
