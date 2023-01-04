@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "valid input": {
+      "commandName": "Project",
+      "commandLineArgs": "convert --input \"./mylist.xml\" --output \"./converted.db\""
+    }
+  }
+}
