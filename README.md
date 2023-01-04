@@ -1,5 +1,5 @@
 # Anidb Export Parser
-Parses an anidb xml export and saves it as [LiteDB](https://www.litedb.org/) database.
+Parses an anidb xml export and saves it as sqlite database.
 
 ## Running
 - Go to https://anidb.net/user/export and create a new export using format Xml-plain-new
