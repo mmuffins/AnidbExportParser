@@ -23,7 +23,7 @@ namespace ParserConsole
                 IsRequired = true,
                 Description = "Path to the AniDB Mylist export file.",
             };
-            inputOption.AddAlias("i");
+            inputOption.AddAlias("-i");
             command.AddOption(inputOption);
 
             var outputOption = new Option<FileInfo>("--output")
@@ -31,7 +31,7 @@ namespace ParserConsole
                 IsRequired = true,
                 Description = "Path to save the converted database to."
             };
-            outputOption.AddAlias("o");
+            outputOption.AddAlias("-o");
             command.AddOption(outputOption);
 
             command.SetHandler<FileInfo, FileInfo>(ConvertHandler,inputOption,outputOption);

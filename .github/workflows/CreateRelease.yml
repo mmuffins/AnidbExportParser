@@ -1,8 +1,10 @@
-name: .NET
+name: Build Application
 
 on:
   workflow_dispatch:
   push:
+    branches: 
+      - main
   pull_request:
     branches: 
       - main
@@ -27,7 +29,7 @@ jobs:
       run: dotnet restore
       
     - name: dotnet publish
-      run: dotnet publish AnidbExportParser.sln --configuration ${{ env.Configuration }} -p:PublishSingleFile=false --self-contained false -p:PublishTrimmed=false -p:PublishReadyToRun=true --runtime ${{ env.Runtime }} --framework ${{ env.Framework }} --output publish
+      run: dotnet publish "${{ github.workspace }}/ParserConsole/ParserConsole.csproj" --configuration ${{ env.Configuration }} -p:PublishSingleFile=true --self-contained true -p:PublishTrimmed=false -p:PublishReadyToRun=true --runtime ${{ env.Runtime }} --framework ${{ env.Framework }} --output "${{ github.workspace }}/publish"
       
     - name: dotnet test
       run: dotnet test AnidbExportParser.sln --configuration ${{ env.Configuration }} --framework ${{ env.Framework }} --verbosity normal --logger "trx;LogFileName=TestResults.trx"
@@ -43,7 +45,7 @@ jobs:
       
     - name: Create Release
       uses: actions/create-release@v1
-      if: ${{ github.event_name != 'pull_request' && github.ref == 'refs/heads/master' }}
+      if: ${{ github.event_name != 'pull_request' && github.ref == 'refs/heads/main' }}
       id: create_release
       env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
@@ -55,7 +57,7 @@ jobs:
         
     - name: Upload Release Asset
       id: upload-release-asset 
-      if: ${{ github.event_name != 'pull_request' && github.ref == 'refs/heads/master' }}
+      if: ${{ github.event_name != 'pull_request' && github.ref == 'refs/heads/main' }}
       uses: actions/upload-release-asset@v1
       env:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
