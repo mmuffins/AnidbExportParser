@@ -8,7 +8,14 @@ namespace AnidbExportParser.Model
     [XmlRoot(ElementName = "episode")]
     public class Episode
     {
+        [XmlIgnore]
+        public ICollection<Model.File> Files { get; set; }
+
+        [XmlIgnore]
+        public Anime Anime { get; set; }
+        // Foreign Key for Anime
         public int AnimeID { get; set; }
+
         public int EpID { get; set; }
         public string EpNo { get; set; }
         public string EpName { get; set; }
@@ -107,6 +114,8 @@ namespace AnidbExportParser.Model
         public int? MyEpState { get; set; }
         public string? MyEpStateString { get; set; }
         public string? MyEpStateIcon { get; set; }
+
+
 
         public override string ToString()
         {

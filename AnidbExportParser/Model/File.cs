@@ -8,9 +8,18 @@ namespace AnidbExportParser.Model
     [XmlRoot(ElementName = "file")]
     public class File
     {
-        public long AnimeID { get; set; }
-        public long EpID { get; set; }
-        public long FID { get; set; }
+
+        // Foreign key for Anime
+        public int AnimeID { get; set; }
+        [XmlIgnore]
+        public Anime Anime { get; private set; }
+
+        // Foreign key for Episodes
+        public int EpID { get; set; }
+        [XmlIgnore]
+        public Episode Episode { get; set; }
+
+        public int FID { get; set; }
         public long Size { get; set; }
         public int Length { get; set; }
         public int Generic { get; set; }

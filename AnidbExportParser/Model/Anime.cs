@@ -1,5 +1,6 @@
 ﻿using ExtensionMethods;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Diagnostics;
 using System.Xml.Serialization;
 using static System.Runtime.InteropServices.JavaScript.JSType;
 
@@ -141,6 +142,12 @@ namespace AnidbExportParser.Model
         public string? MyWishlistPriorityName { get; set; }
         public string? MyWishlistComment { get; set; }
         public int Hentai { get; set; }
+
+        [XmlIgnore]
+        public ICollection<Episode> Episodes { get; private set; }
+        [XmlIgnore]
+        public ICollection<Model.File> Files { get; private set; }
+
 
         public override string ToString()
         {
