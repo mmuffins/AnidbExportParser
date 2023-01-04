@@ -10,7 +10,12 @@ namespace AnidbExportParser.Model
         [XmlIgnore]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public long EntityId { get; private set; }
+
+        [XmlIgnore]
+        public Anime Anime { get; set; }
+        // Foreign Key for Anime
         public int AnimeID { get; set; }
+
         public int CompanyID { get; set; }
         public string CompanyName { get; set; }
         public string? CompanyShortName { get; set; }

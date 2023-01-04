@@ -147,6 +147,10 @@ namespace AnidbExportParser.Model
         public ICollection<Episode> Episodes { get; private set; }
         [XmlIgnore]
         public ICollection<Model.File> Files { get; private set; }
+        [XmlIgnore]
+        public ICollection<Title> Titles { get; private set; }
+        [XmlIgnore]
+        public ICollection<Company> Companies { get; private set; }
 
 
         public override string ToString()

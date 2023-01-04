@@ -9,7 +9,10 @@ namespace AnidbExportParser.Model
     public class Episode
     {
         [XmlIgnore]
-        public ICollection<Model.File> Files { get; set; }
+        public ICollection<Model.File> Files { get; private set; }
+
+        [XmlIgnore]
+        public ICollection<EpisodeTitle> Titles { get; private set; }
 
         [XmlIgnore]
         public Anime Anime { get; set; }

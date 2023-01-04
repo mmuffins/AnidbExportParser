@@ -83,6 +83,12 @@ namespace AnidbExportParser
                 .ToTable("company")
                 .HasKey(c => c.EntityId);
 
+            builder.Entity<Company>()
+                .HasOne(a => a.Anime)
+                .WithMany(e => e.Companies)
+                .HasForeignKey(e => e.AnimeID)
+                .OnDelete(DeleteBehavior.Cascade);
+
             builder.Entity<Episode>()
                 .ToTable("episode")
                 .HasKey(c => c.EpID);
@@ -96,6 +102,12 @@ namespace AnidbExportParser
             builder.Entity<EpisodeTitle>()
                 .ToTable("episode_title")
                 .HasKey(c => new { c.AnimeID, c.EpID, c.LanguageID });
+
+            builder.Entity<EpisodeTitle>()
+                .HasOne(a => a.Episode)
+                .WithMany(e => e.Titles)
+                .HasForeignKey(e => e.EpID)
+                .OnDelete(DeleteBehavior.Cascade);
 
             builder.Entity<Model.File>()
                 .ToTable("file")
@@ -121,7 +133,7 @@ namespace AnidbExportParser
                 .HasIndex(c => new { c.FID, c.EpID });
 
             builder.Entity<FileFile>()
-                .ToTable("filefile")
+                .ToTable("file_file")
                 .HasKey(c => c.EntityId);
 
             builder.Entity<FileFile>()
@@ -140,6 +152,12 @@ namespace AnidbExportParser
             builder.Entity<Title>()
                 .ToTable("title")
                 .HasKey(c => c.EntityId);
+
+            builder.Entity<Title>()
+                .HasOne(a => a.Anime)
+                .WithMany(e => e.Titles)
+                .HasForeignKey(e => e.AnimeID)
+                .OnDelete(DeleteBehavior.Cascade);
 
             builder.Entity<UserInfo>()
                 .ToTable("user_info")
