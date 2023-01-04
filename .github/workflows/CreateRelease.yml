@@ -64,5 +64,5 @@ jobs:
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
         asset_path: ${{ github.workspace }}\publish\ArtistNormalizer.zip
-        asset_name: ArtistNormalizer
+        asset_name: ArtistNormalizer.zip
         asset_content_type: application/zip
