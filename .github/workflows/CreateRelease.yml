@@ -41,7 +41,7 @@ jobs:
         path: ${{ github.workspace }}\publish
       
     - name: Zip Files
-      run: Compress-Archive -Path "${{ github.workspace }}\publish\*" -DestinationPath "${{ github.workspace }}\publish\ArtistNormalizer.zip"
+      run: Compress-Archive -Path "${{ github.workspace }}\publish\*" -DestinationPath "${{ github.workspace }}\publish\AnidbExportParser.zip"
       
     - name: Create Release
       uses: actions/create-release@v1
@@ -63,6 +63,6 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       with:
         upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ${{ github.workspace }}\publish\ArtistNormalizer.zip
-        asset_name: ArtistNormalizer.zip
+        asset_path: ${{ github.workspace }}\publish\AnidbExportParser.zip
+        asset_name: AnidbExportParser.zip
         asset_content_type: application/zip
