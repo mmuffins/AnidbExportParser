@@ -5,9 +5,11 @@ on:
   push:
     branches: 
       - main
+      - 'dependabot/**'
   pull_request:
     branches: 
       - main
+      - 'dependabot/**'
 
 jobs:
   build:
@@ -18,7 +20,7 @@ jobs:
       Runtime: win-x64
       
     steps:
-    - uses: actions/checkout@v2
+    - uses: actions/checkout@v3
             
     - name: Setup .NET
       uses: actions/setup-dotnet@v1
@@ -35,34 +37,46 @@ jobs:
       run: dotnet test AnidbExportParser.sln --configuration ${{ env.Configuration }} --framework ${{ env.Framework }} --verbosity normal --logger "trx;LogFileName=TestResults.trx"
               
     - name: Upload artifact
-      uses: actions/upload-artifact@v2
+      uses: actions/upload-artifact@v3
       with:
         name: Application
         path: ${{ github.workspace }}\publish
       
     - name: Zip Files
       run: Compress-Archive -Path "${{ github.workspace }}\publish\*" -DestinationPath "${{ github.workspace }}\publish\AnidbExportParser.zip"
-      
-    - name: Create Release
-      uses: actions/create-release@v1
-      if: ${{ github.event_name != 'pull_request' && github.ref == 'refs/heads/main' }}
-      id: create_release
-      env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} 
-      with:
-        tag_name: ${{ github.run_id }}
-        release_name: Release ${{ github.run_id }}
-        draft: false
-        prerelease: false
         
-    - name: Upload Release Asset
-      id: upload-release-asset 
-      if: ${{ github.event_name != 'pull_request' && github.ref == 'refs/heads/main' }}
-      uses: actions/upload-release-asset@v1
-      env:
-        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+    - name: Create release
+      uses: actions/github-script@v6
+      if: ${{ github.event_name != 'pull_request'  && github.ref_name == 'main' }}
+      id: create-release
       with:
-        upload_url: ${{ steps.create_release.outputs.upload_url }}
-        asset_path: ${{ github.workspace }}\publish\AnidbExportParser.zip
-        asset_name: AnidbExportParser.zip
-        asset_content_type: application/zip
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        script: |
+          const {data: newRelease} = await github.rest.repos.createRelease({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            name: '${{ github.run_id }}',
+            tag_name: '${{ github.run_id }}',
+            generate_release_notes: true,
+            draft: false,
+            prerelease: false
+          });
+          console.log(`Release has been created with id ${newRelease.id}: ${newRelease.html_url}`)
+          core.setOutput("url", newRelease.html_url)
+          core.setOutput("id", newRelease.id)
+
+    - name: Upload Release Assets
+      uses: actions/github-script@v6
+      if: ${{ github.event_name != 'pull_request'  && github.ref_name == 'main' }}
+      with:
+        github-token: ${{ secrets.GITHUB_TOKEN }}
+        script: |
+          const fs = require('fs').promises
+          const attachment = await fs.readFile("./publish/AnidbExportParser.zip")
+          await github.rest.repos.uploadReleaseAsset({
+            owner: context.repo.owner,
+            repo: context.repo.repo,
+            release_id: '${{ steps.create-release.outputs.id }}',
+            data: attachment,
+            name: 'AnidbExportParser.zip'
+          });
