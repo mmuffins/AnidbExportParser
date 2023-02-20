@@ -69,7 +69,7 @@ jobs:
           const {data: newRelease} = await github.rest.repos.createRelease({
             owner: context.repo.owner,
             repo: context.repo.repo,
-            name: 'AniDb Export Parster ${{ env.version }}',
+            name: 'AniDb Export Parser ${{ env.version }}',
             tag_name: 'v${{ env.version }}',
             generate_release_notes: true,
             draft: false,
