@@ -1,0 +1,6 @@
+{
+  "dotnet.defaults.buildConfiguration": "Release",
+  "dotnet.defaults.runtime": "win-x64",
+  "dotnet.defaults.framework": "net9.0",
+  "dotnet.defaults.version": "1.0.0"
+}

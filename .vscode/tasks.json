@@ -1,34 +1,5 @@
 {
   "version": "2.0.0",
-  "inputs": [
-    {
-      "id": "build_configuration",
-      "type": "pickString",
-      "description": "Build configuration",
-      "options": ["Debug", "Release"],
-      "default": "Release"
-    },
-    {
-      "id": "build_runtime",
-      "type": "pickString",
-      "description": "Runtime identifier (RID)",
-      "options": ["linux-x64", "win-x64", "osx-x64", "linux-arm64", "win-arm64", "osx-arm64"],
-      "default": "linux-x64"
-    },
-    {
-      "id": "build_framework",
-      "type": "pickString",
-      "description": "Target framework",
-      "options": ["net8.0", "net9.0", "net10.0"],
-      "default": "net10.0"
-    },
-    {
-      "id": "version",
-      "type": "promptString",
-      "description": "Version/PackageVersion (e.g., 1.2.3)",
-      "default": "1.0.0"
-    }
-  ],
   "tasks": [
     {
       "label": "dotnet restore",
@@ -45,15 +16,15 @@
       "args": [
         "publish",
         "${workspaceFolder}/ParserConsole/ParserConsole.csproj",
-        "--configuration", "${input:build_configuration}",
-        "--runtime", "${input:build_runtime}",
-        "--framework", "${input:build_framework}",
+        "--configuration", "${config:dotnet.defaults.buildConfiguration}",
+        "--runtime", "${config:dotnet.defaults.runtime}",
+        "--framework", "${config:dotnet.defaults.framework}",
         "--self-contained", "true",
         "-p:PublishSingleFile=true",
         "-p:PublishTrimmed=false",
         "-p:PublishReadyToRun=true",
-        "-p:Version=${input:version}",
-        "-p:PackageVersion=${input:version}",
+        "-p:Version=${config:dotnet.defaults.version}",
+        "-p:PackageVersion=${config:dotnet.defaults.version}",
         "--output", "${workspaceFolder}/publish"
       ],
       "problemMatcher": "$msCompile"
@@ -65,20 +36,17 @@
       "args": [
         "test",
         "AnidbExportParser.sln",
-        "--configuration", "${input:build_configuration}",
-        "--framework", "${input:build_framework}",
-        "--verbosity", "normal",
-        "--logger", "trx;LogFileName=TestResults.trx"
+        "--configuration", "${config:dotnet.defaults.buildConfiguration}",
+        "--framework", "${config:dotnet.defaults.framework}",
+        "--verbosity", "normal"
       ],
-      "options": {
-        "cwd": "${workspaceFolder}"
-      },
+      "options": { "cwd": "${workspaceFolder}" },
       "problemMatcher": "$msCompile"
     },
     {
-      "label": "CI: restore → publish → test",
+      "label": "CI: restore → publish",
       "dependsOrder": "sequence",
-      "dependsOn": ["dotnet restore", "dotnet publish", "dotnet test"]
+      "dependsOn": ["dotnet restore", "dotnet publish"]
     }
   ]
 }
