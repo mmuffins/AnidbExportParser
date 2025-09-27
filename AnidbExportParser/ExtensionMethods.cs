@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Globalization;
 
 namespace ExtensionMethods
 {
@@ -31,8 +32,8 @@ namespace ExtensionMethods
 
         public static DateTime? ParseAniDbDateTime(this string str)
         {
-            DateTime k;
-            if (DateTime.TryParse(str, out k))
+            if (DateTime.TryParseExact(str, "dd.MM.yyyy HH:mm",
+                CultureInfo.InvariantCulture, DateTimeStyles.AssumeLocal, out var k))
             {
                 return k;
             }

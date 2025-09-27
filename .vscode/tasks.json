@@ -1,0 +1,74 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "cleanup debug output",
+      "type": "shell",
+      "command": "bash",
+      "args": ["-c", "rm -f '${config:debug.outputFile}'"],
+      "windows": {
+        "command": "powershell",
+        "args": [
+          "-NoProfile", "-Command",
+          "if (Test-Path '${config:debug.outputFile}') { Remove-Item '${config:debug.outputFile}' -Force }"
+        ]
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "prelaunch: cleanup → restore",
+      "dependsOrder": "sequence",
+      "dependsOn": [
+        "cleanup debug output",
+        "dotnet restore"
+      ]
+    },
+    {
+      "label": "dotnet restore",
+      "type": "shell",
+      "command": "dotnet",
+      "args": ["restore"],
+      "group": { "kind": "build", "isDefault": true },
+      "problemMatcher": "$msCompile"
+    },
+    {
+      "label": "dotnet publish",
+      "type": "shell",
+      "command": "dotnet",
+      "args": [
+        "publish",
+        "${workspaceFolder}/ParserConsole/ParserConsole.csproj",
+        "--configuration", "${config:dotnet.defaults.buildConfiguration}",
+        "--runtime", "${config:dotnet.defaults.runtime}",
+        "--framework", "${config:dotnet.defaults.framework}",
+        "--self-contained", "true",
+        "-p:PublishSingleFile=true",
+        "-p:PublishTrimmed=false",
+        "-p:PublishReadyToRun=true",
+        "-p:Version=${config:dotnet.defaults.version}",
+        "-p:PackageVersion=${config:dotnet.defaults.version}",
+        "--output", "${workspaceFolder}/publish"
+      ],
+      "problemMatcher": "$msCompile"
+    },
+    {
+      "label": "dotnet test",
+      "type": "shell",
+      "command": "dotnet",
+      "args": [
+        "test",
+        "AnidbExportParser.sln",
+        "--configuration", "${config:dotnet.defaults.buildConfiguration}",
+        "--framework", "${config:dotnet.defaults.framework}",
+        "--verbosity", "normal"
+      ],
+      "options": { "cwd": "${workspaceFolder}" },
+      "problemMatcher": "$msCompile"
+    },
+    {
+      "label": "CI: restore → publish",
+      "dependsOrder": "sequence",
+      "dependsOn": ["dotnet restore", "dotnet publish"]
+    }
+  ]
+}
