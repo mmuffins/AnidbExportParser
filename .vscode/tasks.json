@@ -2,6 +2,28 @@
   "version": "2.0.0",
   "tasks": [
     {
+      "label": "cleanup debug output",
+      "type": "shell",
+      "command": "bash",
+      "args": ["-c", "rm -f '${config:debug.outputFile}'"],
+      "windows": {
+        "command": "powershell",
+        "args": [
+          "-NoProfile", "-Command",
+          "if (Test-Path '${config:debug.outputFile}') { Remove-Item '${config:debug.outputFile}' -Force }"
+        ]
+      },
+      "problemMatcher": []
+    },
+    {
+      "label": "prelaunch: cleanup → restore",
+      "dependsOrder": "sequence",
+      "dependsOn": [
+        "cleanup debug output",
+        "dotnet restore"
+      ]
+    },
+    {
       "label": "dotnet restore",
       "type": "shell",
       "command": "dotnet",
