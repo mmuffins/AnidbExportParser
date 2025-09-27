@@ -1,7 +1,44 @@
 {
-  // Use IntelliSense to learn about possible attributes.
-  // Hover to view descriptions of existing attributes.
-  // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
   "version": "0.2.0",
-  "configurations": []
+  "configurations": [
+    {
+      "name": "ParserConsole (run)",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "dotnet restore",                   // or a build task you prefer
+      "program": "dotnet",
+      "args": [
+        "${workspaceFolder}/ParserConsole/bin/${config:dotnet.defaults.buildConfiguration}/${config:dotnet.defaults.framework}/ParserConsole.dll",
+        "convert",
+        "--input", "${workspaceFolder}/publish/mylist.xml",
+        "--output", "${workspaceFolder}/publish/converted.db"
+      ],
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal",
+      "stopAtEntry": false,
+      "justMyCode": true,
+      "requireExactSource": false
+    },
+    {
+      "name": "ParserConsole (build and run)",
+      "type": "coreclr",
+      "request": "launch",
+      "preLaunchTask": "dotnet restore",
+      "program": "dotnet",
+      "args": [
+        "run",
+        "--project", "${workspaceFolder}/ParserConsole/ParserConsole.csproj",
+        "--configuration", "${config:dotnet.defaults.buildConfiguration}",
+        "--framework", "${config:dotnet.defaults.framework}",
+        "--",
+        "convert",
+        "--input", "${workspaceFolder}/publish/mylist.xml",
+        "--output", "${workspaceFolder}/publish/converted.db"
+      ],
+      "cwd": "${workspaceFolder}",
+      "console": "integratedTerminal",
+      "stopAtEntry": false,
+      "justMyCode": true
+    }
+  ]
 }
