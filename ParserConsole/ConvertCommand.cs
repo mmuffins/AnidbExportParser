@@ -35,18 +35,7 @@ namespace ParserConsole
             outputOption.Aliases.Add("-o");
             command.Add(outputOption);
 
-            // command.Handler = CommandHandler.Create<FileInfo, FileInfo>(ConvertHandler);
-            // command.SetHandler(
-            //     async (FileInfo input, FileInfo output) => await ConvertHandler(input, output),
-            //     inputOption, outputOption
-            // );
-            command.SetAction(parseResult =>
-            {
-                var input  = parseResult.GetValueForOption(inputOption)!;
-                var output = parseResult.GetValueForOption(outputOption)!;
-
-                ConvertHandler(input, output).GetAwaiter().GetResult();
-            });
+            command.Handler = CommandHandler.Create<FileInfo, FileInfo>(ConvertHandler);
 
             return command;
         }
