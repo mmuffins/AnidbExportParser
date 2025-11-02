@@ -35,7 +35,7 @@ namespace ParserConsole
             outputOption.Aliases.Add("-o");
             command.Add(outputOption);
 
-            command.Handler = CommandHandler.Create<FileInfo, FileInfo>(ConvertHandler);
+            command.SetHandler<FileInfo, FileInfo>(ConvertHandler,inputOption,outputOption);
 
             return command;
         }
