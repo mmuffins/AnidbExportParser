@@ -15,7 +15,7 @@ namespace ParserConsole
 
             var convertCommand = new ConvertCommand();
             rootCommand.Add(convertCommand.GetCommand());
-            return await rootCommand.InvokeAsync(args);
+            return await rootCommand.Parse(args).InvokeAsync();
         }
     }
 }
