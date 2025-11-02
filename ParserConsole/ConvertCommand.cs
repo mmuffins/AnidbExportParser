@@ -20,18 +20,18 @@ namespace ParserConsole
 
             var inputOption = new Option<FileInfo>("--input")
             {
-                IsRequired = true,
+                Required = true,
                 Description = "Path to the AniDB Mylist export file.",
             };
-            inputOption.AddAlias("-i");
+            inputOption.Aliases.Add("-i");
             command.Add(inputOption);
 
             var outputOption = new Option<FileInfo>("--output")
             {
-                IsRequired = true,
+                Required = true,
                 Description = "Path to save the converted database to."
             };
-            outputOption.AddAlias("-o");
+            outputOption.Aliases.Add("-o");
             command.Add(outputOption);
 
             command.SetHandler<FileInfo, FileInfo>(ConvertHandler,inputOption,outputOption);
