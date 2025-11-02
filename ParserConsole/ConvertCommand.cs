@@ -3,7 +3,6 @@ using System;
 using System.Collections.Generic;
 using System.CommandLine;
 using System.CommandLine.Invocation;
-using System.CommandLine.Parsing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -35,8 +34,12 @@ namespace ParserConsole
             outputOption.Aliases.Add("-o");
             command.Add(outputOption);
 
-            command.SetHandler<FileInfo, FileInfo>(ConvertHandler,inputOption,outputOption);
-
+            command.SetAction(async (ParseResult parseResult, CancellationToken token) =>
+            {
+                await ConvertHandler(parseResult.GetValue(inputOption), parseResult.GetValue(outputOption));
+                return 0;
+            });
+            
             return command;
         }
 
