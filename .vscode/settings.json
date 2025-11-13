@@ -1,7 +1,7 @@
 {
   "dotnet.defaults.buildConfiguration": "Debug",
   "dotnet.defaults.runtime": "win-x64",
-  "dotnet.defaults.framework": "net9.0",
+  "dotnet.defaults.framework": "net10.0",
   "dotnet.defaults.version": "1.0.0",
   "debug.inputFile": "${workspaceFolder}/publish/mylist.xml",
   "debug.outputFile": "${workspaceFolder}/publish/converted.db"

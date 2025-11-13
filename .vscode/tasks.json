@@ -5,11 +5,15 @@
       "label": "cleanup debug output",
       "type": "shell",
       "command": "bash",
-      "args": ["-c", "rm -f '${config:debug.outputFile}'"],
+      "args": [
+        "-c",
+        "rm -f '${config:debug.outputFile}'"
+      ],
       "windows": {
         "command": "powershell",
         "args": [
-          "-NoProfile", "-Command",
+          "-NoProfile",
+          "-Command",
           "if (Test-Path '${config:debug.outputFile}') { Remove-Item '${config:debug.outputFile}' -Force }"
         ]
       },
@@ -27,8 +31,13 @@
       "label": "dotnet restore",
       "type": "shell",
       "command": "dotnet",
-      "args": ["restore"],
-      "group": { "kind": "build", "isDefault": true },
+      "args": [
+        "restore"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      },
       "problemMatcher": "$msCompile"
     },
     {
@@ -38,16 +47,21 @@
       "args": [
         "publish",
         "${workspaceFolder}/ParserConsole/ParserConsole.csproj",
-        "--configuration", "${config:dotnet.defaults.buildConfiguration}",
-        "--runtime", "${config:dotnet.defaults.runtime}",
-        "--framework", "${config:dotnet.defaults.framework}",
-        "--self-contained", "true",
+        "--configuration",
+        "${config:dotnet.defaults.buildConfiguration}",
+        "--runtime",
+        "${config:dotnet.defaults.runtime}",
+        "--framework",
+        "${config:dotnet.defaults.framework}",
+        "--self-contained",
+        "true",
         "-p:PublishSingleFile=true",
         "-p:PublishTrimmed=false",
         "-p:PublishReadyToRun=true",
         "-p:Version=${config:dotnet.defaults.version}",
         "-p:PackageVersion=${config:dotnet.defaults.version}",
-        "--output", "${workspaceFolder}/publish"
+        "--output",
+        "${workspaceFolder}/publish"
       ],
       "problemMatcher": "$msCompile"
     },
@@ -58,17 +72,28 @@
       "args": [
         "test",
         "AnidbExportParser.sln",
-        "--configuration", "${config:dotnet.defaults.buildConfiguration}",
-        "--framework", "${config:dotnet.defaults.framework}",
-        "--verbosity", "normal"
+        "--configuration",
+        "${config:dotnet.defaults.buildConfiguration}",
+        "--framework",
+        "${config:dotnet.defaults.framework}",
+        "--verbosity",
+        "normal"
       ],
-      "options": { "cwd": "${workspaceFolder}" },
+      "options": {
+        "cwd": "${workspaceFolder}"
+      },
       "problemMatcher": "$msCompile"
     },
     {
       "label": "CI: restore → publish",
       "dependsOrder": "sequence",
-      "dependsOn": ["dotnet restore", "dotnet publish"]
+      "dependsOn": [
+        "dotnet restore",
+        "dotnet publish"
+      ],
+      "problemMatcher": [
+        "$eslint-compact"
+      ]
     }
   ]
 }
