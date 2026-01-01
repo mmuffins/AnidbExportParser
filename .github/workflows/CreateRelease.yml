@@ -36,7 +36,7 @@ jobs:
       run: dotnet test AnidbExportParser.sln --configuration ${{ env.build_configuration }} --framework ${{ env.build_framework }} --verbosity normal --logger "trx;LogFileName=TestResults.trx"
               
     - name: Upload artifact
-      uses: actions/upload-artifact@v5
+      uses: actions/upload-artifact@v6
       with:
         name: build
         path: ${{ github.workspace }}/publish
