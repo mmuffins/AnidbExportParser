@@ -8,10 +8,12 @@
       "preLaunchTask": "prelaunch: cleanup → restore",
       "program": "dotnet",
       "args": [
-        "${workspaceFolder}/ParserConsole/bin/${config:dotnet.defaults.buildConfiguration}/${config:dotnet.defaults.framework}/ParserConsole.dll",
+        "${workspaceFolder}/ParserConsole/bin/${config:dotnet.defaults.buildConfiguration}/${config:dotnet.defaults.framework}/${config:dotnet.defaults.runtime}/ParserConsole.dll",
         "convert",
-        "--input", "${config:debug.inputFile}",
-        "--output", "${config:debug.outputFile}"
+        "--input",
+        "${config:debug.inputFile}",
+        "--output",
+        "${config:debug.outputFile}"
       ],
       "cwd": "${workspaceFolder}",
       "console": "integratedTerminal",
