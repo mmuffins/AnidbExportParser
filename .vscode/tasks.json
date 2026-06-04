@@ -2,6 +2,26 @@
   "version": "2.0.0",
   "tasks": [
     {
+      "label": "cleanup ParserConsole test databases",
+      "type": "shell",
+      "command": "bash",
+      "args": [
+        "-c",
+        "find \"$1\" -type f \\( -name \"*Test1.db\" -o -name \"*Test2.db\" \\) -delete",
+        "cleanup-db",
+        "${workspaceFolder}/ParserConsole"
+      ],
+      "windows": {
+        "command": "powershell",
+        "args": [
+          "-NoProfile",
+          "-Command",
+          "$files = Get-ChildItem -Path '${workspaceFolder}\\ParserConsole' -Recurse -File -Include '*Test1.db','*Test2.db' -ErrorAction SilentlyContinue; if ($files) { $files | ForEach-Object { Remove-Item -LiteralPath $_.FullName -Force -ErrorAction SilentlyContinue } }; exit 0"
+        ]
+      },
+      "problemMatcher": []
+    },
+    {
       "label": "cleanup debug output",
       "type": "shell",
       "command": "bash",
@@ -20,12 +40,13 @@
       "problemMatcher": []
     },
     {
-      "label": "prelaunch: cleanup → restore",
-      "dependsOrder": "sequence",
-      "dependsOn": [
-        "cleanup debug output",
-        "dotnet restore"
-      ]
+      "label": "dotnet clean",
+      "type": "shell",
+      "command": "dotnet",
+      "args": [
+        "clean"
+      ],
+      "problemMatcher": "$msCompile"
     },
     {
       "label": "dotnet restore",
@@ -85,9 +106,19 @@
       "problemMatcher": "$msCompile"
     },
     {
-      "label": "CI: restore → publish",
+      "label": "cleanup - restore",
       "dependsOrder": "sequence",
       "dependsOn": [
+        "cleanup ParserConsole test databases",
+        "cleanup debug output",
+        "dotnet restore"
+      ]
+    },
+    {
+      "label": "restore - publish",
+      "dependsOrder": "sequence",
+      "dependsOn": [
+        "cleanup ParserConsole test databases",
         "dotnet restore",
         "dotnet publish"
       ],
