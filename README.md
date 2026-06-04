@@ -7,7 +7,7 @@ Parses an anidb xml export and saves it as sqlite database.
 - Extract the downloaded mylist.xml
 
 ### Windows
-- Publish the project, or download a pre-built binary from github
+- Publish the project using the `restore - publish` vscode task, or download a pre-built binary from github
 - Run ParserConsole.exe and follow the instructions.
 
 ### Linux
@@ -15,13 +15,13 @@ Enable devenv:
 ```bash
 $ devenv shell
 ```
-- Publish the project
+- Publish the project using the `restore - publish` vscode task
 - Run the import
 ```bash
 publish/ParserConsole convert --input <mylist.xml> --output "anidbmylist_$(date +%Y-%m-%d).db"
 ```
 
-Or altenatively:
+- altenatively:
 ```bash
 dotnet run --project ParserConsole -- convert --input <mylist.xml> --output "anidbmylist_$(date +%Y-%m-%d).db"
 ```

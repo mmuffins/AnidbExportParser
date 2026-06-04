@@ -5,7 +5,7 @@
       "name": "ParserConsole (run)",
       "type": "coreclr",
       "request": "launch",
-      "preLaunchTask": "prelaunch: cleanup → restore",
+      "preLaunchTask": "prelaunch: cleanup - restore",
       "program": "dotnet",
       "args": [
         "${workspaceFolder}/ParserConsole/bin/${config:dotnet.defaults.buildConfiguration}/${config:dotnet.defaults.framework}/${config:dotnet.defaults.runtime}/ParserConsole.dll",

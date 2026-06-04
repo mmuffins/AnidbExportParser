@@ -40,13 +40,13 @@
       "problemMatcher": []
     },
     {
-      "label": "prelaunch: cleanup → restore",
-      "dependsOrder": "sequence",
-      "dependsOn": [
-        "cleanup ParserConsole test databases",
-        "cleanup debug output",
-        "dotnet restore"
-      ]
+      "label": "dotnet clean",
+      "type": "shell",
+      "command": "dotnet",
+      "args": [
+        "clean"
+      ],
+      "problemMatcher": "$msCompile"
     },
     {
       "label": "dotnet restore",
@@ -106,7 +106,16 @@
       "problemMatcher": "$msCompile"
     },
     {
-      "label": "CI: restore → publish",
+      "label": "cleanup - restore",
+      "dependsOrder": "sequence",
+      "dependsOn": [
+        "cleanup ParserConsole test databases",
+        "cleanup debug output",
+        "dotnet restore"
+      ]
+    },
+    {
+      "label": "restore - publish",
       "dependsOrder": "sequence",
       "dependsOn": [
         "cleanup ParserConsole test databases",
