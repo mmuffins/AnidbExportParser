@@ -26,5 +26,11 @@ publish/ParserConsole convert --input <mylist.xml> --output "anidbmylist_$(date 
 dotnet run --project ParserConsole -- convert --input <mylist.xml> --output "anidbmylist_$(date +%Y-%m-%d).db"
 ```
 
+In devenv, the shorthand task can also be used:
+```bash
+devenv tasks run parser:convert
+```
+This expects exactly one unextracted TGZ file in the `convert` folder at the root of the repository. The output database will also be created in that folder.
+
 ## Note
 Make sure to clear out all files in the Migration folder and run ```dotnet ef migrations add initial --project AnidbExportParser --verbose``` when changing the database layout.
